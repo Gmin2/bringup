@@ -1,0 +1,8 @@
+{
+  "name": "bringup-node",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@solder/core": "link:../../portfolio/ui/tools/svgs/vector-hardware/packages/core"
+  }
+}

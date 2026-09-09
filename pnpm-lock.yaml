@@ -1,0 +1,13 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      '@solder/core':
+        specifier: link:../../portfolio/ui/tools/svgs/vector-hardware/packages/core
+        version: link:../../portfolio/ui/tools/svgs/vector-hardware/packages/core
