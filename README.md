@@ -66,3 +66,29 @@ each other, so none of them is a second copy of another.
 Known gap: the `overlap` degradation only makes 21 of 26 plans worse, because on
 some plans the two parts it moves together were already overlapping, so no new
 error appears. That is the test being blunt, not the reward being wrong.
+
+## Rendering
+
+Scoring a drawing means rasterising it, and that has to give the same pixels on
+a laptop and on the training box. resvg is reproducible across platforms except
+for one thing: it resolves font family names against whatever is installed. So
+`fonts/` ships DejaVu Sans and DejaVu Sans Mono, resvg is told to ignore system
+fonts, and every font stack in the SVG is rewritten down to `monospace` or
+`sans-serif`, which are the two names it can actually map.
+
+That rewrite is part of the canonical render path, so it has to be applied to
+model output and to reference targets alike. Everything goes through
+`rasterize`. DejaVu Sans Mono is what Menlo derives from, so pinning it barely
+moves the text compared to what the harness playground shows.
+
+    .venv/bin/python bench/render_determinism.py
+
+Three questions, because a font pin that silently falls back looks identical to
+one that works until you run it somewhere else: does every file render, is a
+repeated render byte-identical, and does removing the font files change the
+output on text-bearing files. Over the 112 solder SVGs: 112 render, 112 stable,
+and all 37 text-bearing files change when the fonts are removed.
+
+Speed, measured: 11.6ms for a 5KB part at 512px, 21.4ms for a 61KB assembly. A
+browser render is ~300ms cold. RL renders every rollout, so that ratio decides
+how much training is affordable.
