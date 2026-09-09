@@ -34,7 +34,10 @@ def one(provider, prompt: dict, out: Path, width: int) -> dict:
     svg_path = out / f"{prompt['id']}.svg"
     meta_path = out / f"{prompt['id']}.json"
 
-    if meta_path.exists():
+    # resume on the svg, not the metadata. a run that died on 402 or a timeout
+    # wrote metadata for the failures too, and skipping those would mean topping
+    # up credits and then never retrying the prompts they were topped up for.
+    if svg_path.exists() and meta_path.exists():
         row = json.loads(meta_path.read_text())
         row["skipped"] = True
         return row
