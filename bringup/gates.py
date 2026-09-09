@@ -46,6 +46,26 @@ class GateResult:
         return 1.0 if self.passed else 0.0
 
 
+def ink_fraction(arr: np.ndarray, tol: int = 16) -> float:
+    """Fraction of the canvas that differs from the background.
+
+    Measured against the modal colour, not against white. A drawing on a cream
+    or dark ground is still a drawing, and comparing to white called those 100%
+    ink and rejected them. A canvas flooded with one colour has no modal
+    contrast and correctly comes out near zero.
+    """
+    flat = arr.reshape(-1, 3)
+    # quantise before counting so antialiasing does not split the background
+    # into thousands of near-identical shades and hide the real mode
+    q = (flat // 8).astype(np.uint16)
+    keys = (q[:, 0].astype(np.uint32) << 16) | (q[:, 1].astype(np.uint32) << 8) | q[:, 2]
+    vals, counts = np.unique(keys, return_counts=True)
+    bg_key = vals[counts.argmax()]
+    bg = np.array([(bg_key >> 16) & 0xFF, (bg_key >> 8) & 0xFF, bg_key & 0xFF], dtype=np.int16) * 8 + 4
+    dist = np.abs(flat.astype(np.int16) - bg).max(axis=1)
+    return float((dist > tol).mean())
+
+
 def _fail(res: GateResult, name: str, why: str) -> None:
     res.checks[name] = False
     res.reasons.append(why)
@@ -123,7 +143,7 @@ def check(svg: str, render_width: int = 384) -> GateResult:
         return res
     res.checks["renders"] = True
 
-    ink = float((arr.mean(axis=2) < 245).mean())
+    ink = ink_fraction(arr)
     res.info["ink"] = round(ink, 4)
     res.checks["ink_ok"] = INK_MIN <= ink <= INK_MAX
     if not res.checks["ink_ok"]:
