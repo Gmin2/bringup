@@ -120,3 +120,32 @@ nearly all of it cache hits after the first call, and 1.4k to 4.7k output.
 And scoring the raw model output is wrong: the composer runs `clean()` and a pin
 tidy before it checks anything, so `node/normalize.mjs` does the same, importing
 `clean()` from the live source rather than copying it.
+
+## Gates
+
+With text conditioning there is no target image, so `rasterize` has nothing to
+compare against and the pixel metrics lose their referent. That makes the free
+checks carry more weight than they otherwise would: they are the only part of
+the reward that cannot be argued with.
+
+`bringup/gates.py` is those checks. Each one exists because of a specific cheat:
+
+    no_raster           embedding a png and calling it a drawing
+    no_foreign_object   html that only renders in a browser, blank in resvg
+    viewbox_sane        shrinking the viewBox until the canvas is near-empty,
+                        a documented RLRF reward hack
+    ink_ok              a blank canvas, or one flooded with a single fill
+    varied              a solid rectangle passes every other check
+    length_ok           runaway generation, and stubs too small to be a drawing
+    shapes_ok           same, on geometry rather than bytes
+    parses / is_svg     output that is not svg
+
+    .venv/bin/python bench/gate_sanity.py
+
+The check asserts each cheat trips its *own* gate, not merely that the result
+fails overall, so a cheat cannot be caught by accident while the gate meant to
+catch it never fires. It also runs the 112 real drawings through, because a gate
+that rejects real work is as broken as one that lets cheats through. That second
+half earned its keep immediately: the first length cap was a guess and threw out
+three genuine assemblies, so the bounds are now taken from the corpus, which
+runs 1.6KB to 75KB with a 7.5KB median and 5 to 407 shapes.
