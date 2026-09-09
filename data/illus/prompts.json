@@ -1,0 +1,40 @@
+[
+{"id":"hw-weather","family":"hardware","ref":"asm-esp32-weather-station","prompt":"an isometric exploded technical drawing of an esp32 weather station: the board on a base plate with a temperature sensor and a small oled above it, thin blue line work on an off-white ground, leader lines and monospace labels"},
+{"id":"hw-rover","family":"hardware","ref":"asm-pico-rover-base","prompt":"an isometric exploded diagram of a two-wheel robot rover: acrylic chassis plate, two geared motors underneath, a microcontroller and a motor driver on top, blueprint blue outlines, numbered callouts"},
+{"id":"hw-quad","family":"hardware","ref":"catalog-limited-5-inch-quadcopter","prompt":"a top-down technical drawing of a five inch quadcopter frame with four motors, four propellers and a flight controller at the centre, thin blue linework, part labels around the edge"},
+{"id":"hw-nightlight","family":"hardware","ref":"pico-fading-nightlight","prompt":"a wiring diagram of a fading nightlight: a raspberry pi pico connected to an led through a resistor and a light sensor, boxes for each part with pin names, dashed power rails"},
+{"id":"hw-arm","family":"hardware","ref":"pico-four-axis-robot-arm","prompt":"an isometric exploded view of a four axis robot arm on a base plate, four servos stacked up the joints, thin blue outlines on pale paper, dimension lines"},
+{"id":"hw-radar","family":"hardware","ref":"desk-presence-radar","prompt":"a flat technical schematic of a desk presence radar: an ultrasonic sensor, two servos and a small display wired to a microcontroller, rounded boxes joined by orthogonal wires"},
+{"id":"hw-eink","family":"hardware","ref":"spotify-e-paper-now-playing-display","prompt":"an exploded isometric drawing of an e-paper now-playing display: an e-ink panel, a controller board and a laser-cut enclosure, blueprint style with leader arrows"},
+{"id":"hw-pocket","family":"hardware","ref":"esp32-pocket-tool","prompt":"an isometric cutaway of a handheld pocket tool: an esp32 board, a small screen, a battery and a case, thin blue technical linework"},
+
+{"id":"ui-search","family":"product-ui","ref":"ai-search","prompt":"a product illustration of an ai search interface: a search field with a sparkle badge, and below it a card holding two result rows each with a file icon, a title and a line of preview text, soft rounded cards, subtle depth, muted palette"},
+{"id":"ui-chat","family":"product-ui","ref":"ai-chat-interface","prompt":"a product illustration of a chat interface: alternating message bubbles in a rounded panel, a composer bar at the bottom, one message still typing, clean minimal ui, soft shadows"},
+{"id":"ui-calendar","family":"product-ui","ref":"calendar","prompt":"a product illustration of a calendar month view: a grid of day cells with two coloured event chips, the current day highlighted, rounded card, muted palette"},
+{"id":"ui-bank","family":"product-ui","ref":"bank-stats","prompt":"a product illustration of a banking stats panel: a balance figure, a small rising bar chart, and a row of recent transactions, rounded card on a soft background"},
+{"id":"ui-agent","family":"product-ui","ref":"agent-workflow","prompt":"a product illustration of an agent workflow: three stacked step cards connected by a vertical line, each with an icon, a title and a status pill, one in progress"},
+{"id":"ui-comment","family":"product-ui","ref":"add-comment","prompt":"a product illustration of adding a comment: a text selection in a document with a floating comment box beside it, avatar, input field and a send button"},
+{"id":"ui-memory","family":"product-ui","ref":"ai-memory","prompt":"a product illustration of an ai memory feature: a card listing three remembered facts each with a small icon and a timestamp, one being written in"},
+{"id":"ui-campaign","family":"product-ui","ref":"campaign","prompt":"a product illustration of a marketing campaign panel: a schedule row, an audience count, and a small performance sparkline, rounded cards, restrained colour"},
+
+{"id":"sc-hub","family":"scene","ref":"connected-hub","prompt":"a small isometric scene of a central hub with five nodes orbiting it, thin connector lines between them, one node highlighted, pale ground plane"},
+{"id":"sc-fileflow","family":"scene","ref":"file-flow","prompt":"an isometric scene of files moving along a pipeline: three document cards travelling left to right through a processing block and stacking on the far side"},
+{"id":"sc-stack","family":"scene","ref":"card-stack","prompt":"an isometric scene of a stack of cards fanned out in depth, the top one lifted and tilted, soft drop shadows, minimal palette"},
+{"id":"sc-voice","family":"scene","ref":"voice-note","prompt":"an illustration of a voice note: a rounded pill player with a play button and a waveform of vertical bars of varying height, a timestamp at the end"},
+{"id":"sc-presence","family":"scene","ref":"live-presence","prompt":"an illustration of live presence: four overlapping circular avatars with a green online dot, and a small cursor label floating beside them"},
+{"id":"sc-marquee","family":"scene","ref":"icon-marquee","prompt":"a horizontal marquee of twelve rounded app icon tiles in a single row, fading out at both ends, each tile a simple flat glyph"},
+{"id":"sc-command","family":"scene","ref":"search-command","prompt":"an illustration of a command palette: a floating rounded panel with a search line, four listed commands each with an icon and a keyboard shortcut, one row selected"},
+{"id":"sc-split","family":"scene","ref":"split-reveal","prompt":"an illustration of a split reveal: one panel sliding apart into two halves to expose a chart underneath, thin outlines, soft depth"},
+
+{"id":"ic-folder","family":"icon","ref":null,"prompt":"a simple flat icon of a folder with a document peeking out, single accent colour, rounded corners, no text"},
+{"id":"ic-cloud","family":"icon","ref":null,"prompt":"a minimal line icon of a cloud with an upload arrow, uniform stroke width, rounded caps"},
+{"id":"ic-chart","family":"icon","ref":null,"prompt":"a flat icon of a bar chart with three ascending bars and a trend arrow above them, two colours"},
+{"id":"ic-lock","family":"icon","ref":null,"prompt":"a minimal line icon of a padlock, closed shackle, uniform stroke, rounded"},
+{"id":"ic-bell","family":"icon","ref":null,"prompt":"a flat notification bell icon with a small badge dot in the top right, two tone"},
+{"id":"ic-gear","family":"icon","ref":null,"prompt":"a line icon of a gear with eight teeth and a circular centre, uniform stroke width"},
+
+{"id":"lg-orbit","family":"logo","ref":null,"prompt":"a geometric logo mark: a circle with an elliptical orbit ring crossing it at an angle, two weights of stroke, no text"},
+{"id":"lg-leaf","family":"logo","ref":null,"prompt":"a minimal logo mark of a leaf formed from two overlapping curved shapes, flat two tone green"},
+{"id":"lg-mono","family":"logo","ref":null,"prompt":"a monogram logo of the letters V and H interlocked, geometric, single weight, black on white"},
+{"id":"lg-wave","family":"logo","ref":null,"prompt":"a logo mark of three concentric arcs suggesting a signal, increasing stroke weight outward, single colour"}
+]
