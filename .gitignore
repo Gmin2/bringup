@@ -6,3 +6,6 @@ tmp/
 runs/
 data/plans/
 .env
+data/prompts.json
+data/sft.jsonl
+data/system-*.txt

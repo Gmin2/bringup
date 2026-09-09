@@ -11,6 +11,7 @@
 
 import { createInterface } from 'node:readline'
 import { readFileSync } from 'node:fs'
+import { pathToFileURL } from 'node:url'
 import { checkStructure, checkAssembly, checkElectrical, byId } from '@solder/core'
 
 // errors past this many stop making things worse. linear decay in between so
@@ -106,11 +107,13 @@ export function scorePlan(plan, expect) {
   }
 }
 
-const arg = process.argv[2]
-if (arg) {
+// only act as a cli when run directly; importers get scorePlan and nothing else
+const direct = process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href
+const arg = direct ? process.argv[2] : null
+if (direct && arg) {
   const plan = JSON.parse(readFileSync(arg, 'utf8'))
   console.log(JSON.stringify(scorePlan(plan, null), null, 2))
-} else {
+} else if (direct) {
   const rl = createInterface({ input: process.stdin })
   rl.on('line', (raw) => {
     if (!raw.trim()) return

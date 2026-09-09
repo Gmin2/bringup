@@ -19,10 +19,16 @@ way a test passes or fails, so no judge and no hand-rated pool is needed.
 ## Layout
 
     node/score.mjs      the checks, wrapped as a JSONL worker
-    bringup/scorer.py   python client for it
+    node/normalize.mjs  the same normalisation the composer applies before checking
+    node/recorder.mjs   a provider wrapper that keeps every attempt
+    node/generate.mjs   runs prompts through the real composer
+    node/prompts.mjs    builds a prompt set out of catalog combinations
+    bringup/scorer.py   python client for the scorer
+    bringup/sft.py      runs -> supervised examples
     bench/degrade.py    named, deliberate ways to break a plan
-    bench/reward_sanity.py   does the reward rank good plans above broken ones
-    data/               prompts and generated plans
+    bench/reward_sanity.py    does the reward rank good plans above broken ones
+    bench/repair_capture.mjs  does a repair round actually get recorded
+    data/               prompts and generated plans, all gitignored
     runs/               one directory per training run
 
 `@solder/core` is linked, not vendored, so the reward can never drift from what
@@ -92,3 +98,25 @@ and all 37 text-bearing files change when the fonts are removed.
 Speed, measured: 11.6ms for a 5KB part at 512px, 21.4ms for a 61KB assembly. A
 browser render is ~300ms cold. RL renders every rollout, so that ratio decides
 how much training is affordable.
+
+## Data
+
+`compose()` only returns the plan it settled on. The attempts it discarded are
+the more interesting half: a broken plan, the errors it drew, and the fix. It
+takes a provider though, so `node/recorder.mjs` wraps one and keeps every call
+without anything in the product having to change.
+
+    node node/prompts.mjs --n=2000 --out=data/prompts.json
+    node --env-file=<vh>/.env node/generate.mjs all --prompts=data/prompts.json --jobs=8
+    .venv/bin/python bringup/sft.py
+
+Prompts are built by combining real catalog parts rather than written by a
+model, so the expected part list is exact. The weakness is phrasing: generated
+prompts read more uniform than a person typing into a box. The 40 hand-written
+eval prompts are held out and never generated over, partly for that reason.
+
+Two things to know about the numbers. A prompt costs roughly 13.4k input tokens,
+nearly all of it cache hits after the first call, and 1.4k to 4.7k output.
+And scoring the raw model output is wrong: the composer runs `clean()` and a pin
+tidy before it checks anything, so `node/normalize.mjs` does the same, importing
+`clean()` from the live source rather than copying it.
