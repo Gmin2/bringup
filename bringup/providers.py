@@ -93,6 +93,10 @@ class OpenAIProvider:
         # a local mlx server defaults to 512 tokens, which silently truncates a
         # drawing mid-element and looks exactly like the model failing
         self.max_tokens = max_tokens
+        # openai renamed this and rejects the old name outright; mlx and vllm
+        # only know the old one, so pick by who we are talking to
+        self.token_param = ("max_completion_tokens" if "api.openai.com" in self.base
+                            else "max_tokens")
 
     def generate(self, prompt: str, prompt_id: str = "", timeout: int = 180) -> Generation:
         g = Generation(self.name, self.model, prompt_id)
@@ -105,7 +109,7 @@ class OpenAIProvider:
                 f"{self.base}/v1/chat/completions",
                 {
                     "model": self.model,
-                    "max_tokens": self.max_tokens,
+                    self.token_param: self.max_tokens,
                     "messages": [
                         {"role": "system", "content": SYSTEM},
                         {"role": "user", "content": prompt},

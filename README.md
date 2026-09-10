@@ -202,3 +202,33 @@ browser as you go; the download button writes `ratings.json`.
 
 Three models over 34 prompts is 102 pairs, evenly split across the three
 matchups.
+
+## The judge
+
+Rating the run produced the number that matters most so far:
+
+    openai    won 47/56 decided   83.9%
+    quiver    won 29/47 decided   61.7%
+    qwen3-4b  won  3/55 decided    5.5%
+
+Gates said qwen passes 31/34 and clip said it was roughly comparable. A person
+said 5.5%. That gap is the clearest evidence that neither automated term
+measures quality, and it is why the judge exists.
+
+`bringup/judge.py` asks a vision model the same pairwise question the rating
+page asks a person. Every pair is asked twice with the images swapped, because a
+judge that answers "left" both times has a position bias and counting that as an
+opinion would inflate everything downstream.
+
+    python bench/judge_agreement.py --n 30
+
+    agreement 25/26 = 96%
+    position biased: 0
+
+Measured only over pairs where the person named a winner: both-good and both-bad
+are statements about the pool, not rankings.
+
+96% is enough to use, with one caveat on the record. These were mostly wide
+gaps, frontier against a 4B. Separating two *similar* drawings, which is what a
+reward does during training, is a harder problem than this test proved. Worth
+re-checking on closer pairs once rl is producing them.

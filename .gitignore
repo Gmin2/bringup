@@ -4,6 +4,8 @@ __pycache__/
 *.pyc
 tmp/
 runs/
+# the hand ratings are ground truth, not a run artifact
+!runs/*/ratings.json
 data/plans/
 .env
 data/prompts.json
