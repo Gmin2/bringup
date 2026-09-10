@@ -149,3 +149,33 @@ that rejects real work is as broken as one that lets cheats through. That second
 half earned its keep immediately: the first length cap was a guess and threw out
 three genuine assemblies, so the bounds are now taken from the corpus, which
 runs 1.6KB to 75KB with a 7.5KB median and 5 to 407 shapes.
+
+## The floor
+
+Before choosing a base model or a training recipe, measure what a small open
+model does cold on the same 34 prompts. `bringup/serve.py` runs one locally
+through mlx, which serves an openai-compatible endpoint, so the arena reaches it
+with no new code.
+
+    python -m bringup.serve --model mlx-community/Qwen3-4B-Instruct-2507-4bit
+    LOCAL_MODEL=... LOCAL_NAME=qwen3-4b python -m bringup.arena --providers qwen3-4b
+
+Local rather than an aggregator on purpose: the model measured is byte for byte
+the model that would be trained, with no provider quantisation or serving
+differences in between.
+
+    family          gpt  quiver  qwen4b      gptB    qvB    4bB     gpt s  4b s
+    hardware        8/8    8/8     7/8      13554  13262   2743      129    18
+    product-ui      8/8    8/8     6/8       5266  10216   2001       42    12
+    scene           8/8    7/8     8/8       4993   3801   2546       48    16
+    icon            6/6    6/6     6/6         380    922    624       11     5
+    logo            4/4    4/4     4/4         337   1210    449       13     3
+
+Qwen3-4B returns valid svg on all 34 and passes gates on 31, so rollouts will
+not be degenerate from step one. The gap is density and adherence, not
+validity: hardware drawings are a fifth the size of gpt's, and clip retrieval is
+16/31 top-1 against gpt's 27/34. That gap is what a rendering reward is for.
+
+The three gate failures are xml hygiene, not drawing: a raw `&` in a text label
+and two duplicate attributes. Those are the easiest thing for rl to fix, since
+the gate gives an unambiguous binary signal.
