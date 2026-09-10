@@ -84,11 +84,15 @@ class OpenAIProvider:
     endpoint, which is how our own model joins the comparison later."""
 
     def __init__(self, model: str | None = None, base_url: str | None = None,
-                 api_key_env: str = "OPENAI_API_KEY", name: str = "openai"):
+                 api_key_env: str = "OPENAI_API_KEY", name: str = "openai",
+                 max_tokens: int = 16000):
         self.name = name
         self.model = model or os.environ.get("OPENAI_MODEL", "gpt-6-astra")
         self.base = (base_url or os.environ.get("OPENAI_BASE_URL", "https://api.openai.com")).rstrip("/")
         self.key = os.environ.get(api_key_env, "")
+        # a local mlx server defaults to 512 tokens, which silently truncates a
+        # drawing mid-element and looks exactly like the model failing
+        self.max_tokens = max_tokens
 
     def generate(self, prompt: str, prompt_id: str = "", timeout: int = 180) -> Generation:
         g = Generation(self.name, self.model, prompt_id)
@@ -101,6 +105,7 @@ class OpenAIProvider:
                 f"{self.base}/v1/chat/completions",
                 {
                     "model": self.model,
+                    "max_tokens": self.max_tokens,
                     "messages": [
                         {"role": "system", "content": SYSTEM},
                         {"role": "user", "content": prompt},
@@ -109,12 +114,17 @@ class OpenAIProvider:
                 {"authorization": f"Bearer {self.key}"},
                 timeout,
             )
-            g.raw = d["choices"][0]["message"]["content"] or ""
+            choice = d["choices"][0]
+            g.raw = choice["message"]["content"] or ""
             g.svg = extract_svg(g.raw)
             u = d.get("usage") or {}
             g.usage = {"in": u.get("prompt_tokens", 0), "out": u.get("completion_tokens", 0)}
             if g.svg is None:
-                g.error = "no <svg> in the reply"
+                # say which it was: an unfinished drawing and a refusal are very
+                # different results and should not read the same in a summary
+                stop = choice.get("finish_reason")
+                g.error = ("truncated at the token limit" if stop == "length"
+                           else f"no <svg> in the reply (finish_reason={stop})")
         except urllib.error.HTTPError as e:
             g.error = f"http {e.code}: {e.read()[:200].decode(errors='replace')}"
         except Exception as e:
@@ -171,10 +181,14 @@ def available() -> list:
     if os.environ.get("QUIVER_API_KEY"):
         out.append(QuiverProvider())
     if os.environ.get("LOCAL_MODEL"):
+        # a local mlx server wants no auth, but OpenAIProvider refuses to call
+        # without a key, so give it a placeholder rather than a special case
+        os.environ.setdefault("LOCAL_API_KEY", "local")
         out.append(OpenAIProvider(
             model=os.environ["LOCAL_MODEL"],
-            base_url=os.environ.get("LOCAL_BASE_URL", "http://localhost:8000"),
+            base_url=os.environ.get("LOCAL_BASE_URL", "http://localhost:8080"),
             api_key_env="LOCAL_API_KEY",
-            name="local",
+            name=os.environ.get("LOCAL_NAME", "local"),
+            max_tokens=int(os.environ.get("LOCAL_MAX_TOKENS", "16000")),
         ))
     return out

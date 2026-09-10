@@ -17,7 +17,7 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from bringup.adherence import matrix, score_many
-from bringup.render import rasterize
+from bringup.render import RenderError, rasterize
 
 ROOT = Path(__file__).resolve().parent.parent
 PROMPTS = ROOT / "data/illus/prompts.json"
@@ -29,13 +29,27 @@ def main() -> int:
     d = ROOT / "runs" / run / provider
 
     prompts = json.loads(PROMPTS.read_text())
-    have = [p for p in prompts if (d / f"{p['id']}.svg").exists()]
+    # an output that does not render cannot be scored. that is a gate failure,
+    # not an adherence result, so drop it here rather than let it kill the run
+    have, imgs, broken = [], [], []
+    for p in prompts:
+        f = d / f"{p['id']}.svg"
+        if not f.exists():
+            continue
+        try:
+            imgs.append(rasterize(f.read_text(), width=336))
+            have.append(p)
+        except RenderError as e:
+            broken.append((p["id"], str(e)[:60]))
     if not have:
-        print(f"no svgs in {d}")
+        print(f"no renderable svgs in {d}")
         return 1
-    print(f"{len(have)} outputs from {provider}\n")
-
-    imgs = [rasterize((d / f"{p['id']}.svg").read_text(), width=336) for p in have]
+    print(f"{len(have)} outputs from {provider}"
+          + (f", {len(broken)} unrenderable and skipped" if broken else "") + "\n")
+    for n, e in broken:
+        print(f"  skipped {n}: {e}")
+    if broken:
+        print()
     texts = [p["prompt"] for p in have]
 
     m = matrix(imgs, texts)
