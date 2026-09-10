@@ -1,0 +1,818 @@
+[
+ {
+  "prompt_id": "sc-marquee",
+  "family": "scene",
+  "winner": "both_bad",
+  "a": "qwen3-4b",
+  "b": "openai",
+  "at": 1789062410154
+ },
+ {
+  "prompt_id": "ui-chat",
+  "family": "product-ui",
+  "winner": "openai",
+  "a": "openai",
+  "b": "quiver",
+  "at": 1789062419173
+ },
+ {
+  "prompt_id": "sc-voice",
+  "family": "scene",
+  "winner": "openai",
+  "a": "openai",
+  "b": "qwen3-4b",
+  "at": 1789062421454
+ },
+ {
+  "prompt_id": "hw-eink",
+  "family": "hardware",
+  "winner": "both_good",
+  "a": "quiver",
+  "b": "openai",
+  "at": 1789062462638
+ },
+ {
+  "prompt_id": "ui-bank",
+  "family": "product-ui",
+  "winner": "openai",
+  "a": "openai",
+  "b": "qwen3-4b",
+  "at": 1789062468511
+ },
+ {
+  "prompt_id": "sc-fileflow",
+  "family": "scene",
+  "winner": "openai",
+  "a": "openai",
+  "b": "qwen3-4b",
+  "at": 1789062469896
+ },
+ {
+  "prompt_id": "ui-comment",
+  "family": "product-ui",
+  "winner": "openai",
+  "a": "quiver",
+  "b": "openai",
+  "at": 1789062475454
+ },
+ {
+  "prompt_id": "ui-calendar",
+  "family": "product-ui",
+  "winner": "openai",
+  "a": "qwen3-4b",
+  "b": "openai",
+  "at": 1789062476780
+ },
+ {
+  "prompt_id": "ic-chart",
+  "family": "icon",
+  "winner": "both_bad",
+  "a": "openai",
+  "b": "quiver",
+  "at": 1789062481230
+ },
+ {
+  "prompt_id": "ic-chart",
+  "family": "icon",
+  "winner": "openai",
+  "a": "openai",
+  "b": "qwen3-4b",
+  "at": 1789062483621
+ },
+ {
+  "prompt_id": "lg-wave",
+  "family": "logo",
+  "winner": "openai",
+  "a": "quiver",
+  "b": "openai",
+  "at": 1789062489198
+ },
+ {
+  "prompt_id": "hw-rover",
+  "family": "hardware",
+  "winner": "quiver",
+  "a": "quiver",
+  "b": "qwen3-4b",
+  "at": 1789062491010
+ },
+ {
+  "prompt_id": "sc-voice",
+  "family": "scene",
+  "winner": "both_bad",
+  "a": "qwen3-4b",
+  "b": "quiver",
+  "at": 1789062494968
+ },
+ {
+  "prompt_id": "ui-agent",
+  "family": "product-ui",
+  "winner": "openai",
+  "a": "openai",
+  "b": "qwen3-4b",
+  "at": 1789062496589
+ },
+ {
+  "prompt_id": "ui-campaign",
+  "family": "product-ui",
+  "winner": "both_good",
+  "a": "quiver",
+  "b": "openai",
+  "at": 1789062506115
+ },
+ {
+  "prompt_id": "lg-leaf",
+  "family": "logo",
+  "winner": "openai",
+  "a": "openai",
+  "b": "quiver",
+  "at": 1789062507852
+ },
+ {
+  "prompt_id": "sc-stack",
+  "family": "scene",
+  "winner": "quiver",
+  "a": "qwen3-4b",
+  "b": "quiver",
+  "at": 1789062509270
+ },
+ {
+  "prompt_id": "hw-weather",
+  "family": "hardware",
+  "winner": "openai",
+  "a": "openai",
+  "b": "qwen3-4b",
+  "at": 1789062510840
+ },
+ {
+  "prompt_id": "ui-memory",
+  "family": "product-ui",
+  "winner": "openai",
+  "a": "quiver",
+  "b": "openai",
+  "at": 1789062512762
+ },
+ {
+  "prompt_id": "sc-presence",
+  "family": "scene",
+  "winner": "openai",
+  "a": "openai",
+  "b": "quiver",
+  "at": 1789062513877
+ },
+ {
+  "prompt_id": "ic-bell",
+  "family": "icon",
+  "winner": "openai",
+  "a": "openai",
+  "b": "qwen3-4b",
+  "at": 1789062515114
+ },
+ {
+  "prompt_id": "ui-bank",
+  "family": "product-ui",
+  "winner": "both_bad",
+  "a": "quiver",
+  "b": "qwen3-4b",
+  "at": 1789062517987
+ },
+ {
+  "prompt_id": "sc-fileflow",
+  "family": "scene",
+  "winner": "quiver",
+  "a": "qwen3-4b",
+  "b": "quiver",
+  "at": 1789062522381
+ },
+ {
+  "prompt_id": "hw-radar",
+  "family": "hardware",
+  "winner": "quiver",
+  "a": "qwen3-4b",
+  "b": "quiver",
+  "at": 1789062524483
+ },
+ {
+  "prompt_id": "ic-bell",
+  "family": "icon",
+  "winner": "both_good",
+  "a": "quiver",
+  "b": "openai",
+  "at": 1789062532153
+ },
+ {
+  "prompt_id": "sc-split",
+  "family": "scene",
+  "winner": "openai",
+  "a": "qwen3-4b",
+  "b": "openai",
+  "at": 1789062534133
+ },
+ {
+  "prompt_id": "ui-comment",
+  "family": "product-ui",
+  "winner": "quiver",
+  "a": "qwen3-4b",
+  "b": "quiver",
+  "at": 1789062535730
+ },
+ {
+  "prompt_id": "ui-comment",
+  "family": "product-ui",
+  "winner": "openai",
+  "a": "qwen3-4b",
+  "b": "openai",
+  "at": 1789062537187
+ },
+ {
+  "prompt_id": "sc-marquee",
+  "family": "scene",
+  "winner": "quiver",
+  "a": "quiver",
+  "b": "qwen3-4b",
+  "at": 1789062542280
+ },
+ {
+  "prompt_id": "ic-gear",
+  "family": "icon",
+  "winner": "openai",
+  "a": "qwen3-4b",
+  "b": "openai",
+  "at": 1789062543658
+ },
+ {
+  "prompt_id": "hw-eink",
+  "family": "hardware",
+  "winner": "quiver",
+  "a": "quiver",
+  "b": "qwen3-4b",
+  "at": 1789062545332
+ },
+ {
+  "prompt_id": "hw-eink",
+  "family": "hardware",
+  "winner": "openai",
+  "a": "openai",
+  "b": "qwen3-4b",
+  "at": 1789062546254
+ },
+ {
+  "prompt_id": "sc-presence",
+  "family": "scene",
+  "winner": "qwen3-4b",
+  "a": "qwen3-4b",
+  "b": "quiver",
+  "at": 1789062548527
+ },
+ {
+  "prompt_id": "ic-lock",
+  "family": "icon",
+  "winner": "quiver",
+  "a": "quiver",
+  "b": "qwen3-4b",
+  "at": 1789062551941
+ },
+ {
+  "prompt_id": "sc-fileflow",
+  "family": "scene",
+  "winner": "openai",
+  "a": "quiver",
+  "b": "openai",
+  "at": 1789062553356
+ },
+ {
+  "prompt_id": "hw-weather",
+  "family": "hardware",
+  "winner": "quiver",
+  "a": "openai",
+  "b": "quiver",
+  "at": 1789062555314
+ },
+ {
+  "prompt_id": "lg-mono",
+  "family": "logo",
+  "winner": "both_good",
+  "a": "qwen3-4b",
+  "b": "openai",
+  "at": 1789062557789
+ },
+ {
+  "prompt_id": "ic-folder",
+  "family": "icon",
+  "winner": "quiver",
+  "a": "quiver",
+  "b": "qwen3-4b",
+  "at": 1789062560377
+ },
+ {
+  "prompt_id": "sc-marquee",
+  "family": "scene",
+  "winner": "quiver",
+  "a": "quiver",
+  "b": "openai",
+  "at": 1789062561697
+ },
+ {
+  "prompt_id": "lg-orbit",
+  "family": "logo",
+  "winner": "openai",
+  "a": "openai",
+  "b": "quiver",
+  "at": 1789062565626
+ },
+ {
+  "prompt_id": "sc-split",
+  "family": "scene",
+  "winner": "both_bad",
+  "a": "qwen3-4b",
+  "b": "quiver",
+  "at": 1789062568865
+ },
+ {
+  "prompt_id": "hw-pocket",
+  "family": "hardware",
+  "winner": "quiver",
+  "a": "quiver",
+  "b": "openai",
+  "at": 1789062570817
+ },
+ {
+  "prompt_id": "sc-hub",
+  "family": "scene",
+  "winner": "both_good",
+  "a": "quiver",
+  "b": "openai",
+  "at": 1789062574903
+ },
+ {
+  "prompt_id": "sc-hub",
+  "family": "scene",
+  "winner": "openai",
+  "a": "openai",
+  "b": "qwen3-4b",
+  "at": 1789062576456
+ },
+ {
+  "prompt_id": "ic-bell",
+  "family": "icon",
+  "winner": "quiver",
+  "a": "quiver",
+  "b": "qwen3-4b",
+  "at": 1789062577417
+ },
+ {
+  "prompt_id": "lg-leaf",
+  "family": "logo",
+  "winner": "both_bad",
+  "a": "quiver",
+  "b": "qwen3-4b",
+  "at": 1789062580566
+ },
+ {
+  "prompt_id": "hw-arm",
+  "family": "hardware",
+  "winner": "openai",
+  "a": "qwen3-4b",
+  "b": "openai",
+  "at": 1789062582230
+ },
+ {
+  "prompt_id": "ui-memory",
+  "family": "product-ui",
+  "winner": "openai",
+  "a": "openai",
+  "b": "qwen3-4b",
+  "at": 1789062583597
+ },
+ {
+  "prompt_id": "sc-voice",
+  "family": "scene",
+  "winner": "openai",
+  "a": "openai",
+  "b": "quiver",
+  "at": 1789062584745
+ },
+ {
+  "prompt_id": "hw-nightlight",
+  "family": "hardware",
+  "winner": "openai",
+  "a": "qwen3-4b",
+  "b": "openai",
+  "at": 1789062587019
+ },
+ {
+  "prompt_id": "ui-agent",
+  "family": "product-ui",
+  "winner": "openai",
+  "a": "quiver",
+  "b": "openai",
+  "at": 1789062588165
+ },
+ {
+  "prompt_id": "ui-calendar",
+  "family": "product-ui",
+  "winner": "openai",
+  "a": "quiver",
+  "b": "openai",
+  "at": 1789062589049
+ },
+ {
+  "prompt_id": "ui-campaign",
+  "family": "product-ui",
+  "winner": "openai",
+  "a": "openai",
+  "b": "qwen3-4b",
+  "at": 1789062590265
+ },
+ {
+  "prompt_id": "hw-pocket",
+  "family": "hardware",
+  "winner": "openai",
+  "a": "openai",
+  "b": "qwen3-4b",
+  "at": 1789062591456
+ },
+ {
+  "prompt_id": "hw-radar",
+  "family": "hardware",
+  "winner": "openai",
+  "a": "openai",
+  "b": "qwen3-4b",
+  "at": 1789062592664
+ },
+ {
+  "prompt_id": "ic-folder",
+  "family": "icon",
+  "winner": "quiver",
+  "a": "quiver",
+  "b": "openai",
+  "at": 1789062593662
+ },
+ {
+  "prompt_id": "ui-search",
+  "family": "product-ui",
+  "winner": "openai",
+  "a": "qwen3-4b",
+  "b": "openai",
+  "at": 1789062595102
+ },
+ {
+  "prompt_id": "sc-command",
+  "family": "scene",
+  "winner": "both_good",
+  "a": "openai",
+  "b": "quiver",
+  "at": 1789062598074
+ },
+ {
+  "prompt_id": "hw-quad",
+  "family": "hardware",
+  "winner": "both_good",
+  "a": "openai",
+  "b": "quiver",
+  "at": 1789062599919
+ },
+ {
+  "prompt_id": "sc-command",
+  "family": "scene",
+  "winner": "openai",
+  "a": "qwen3-4b",
+  "b": "openai",
+  "at": 1789062602632
+ },
+ {
+  "prompt_id": "ic-cloud",
+  "family": "icon",
+  "winner": "both_good",
+  "a": "quiver",
+  "b": "openai",
+  "at": 1789062604298
+ },
+ {
+  "prompt_id": "ui-chat",
+  "family": "product-ui",
+  "winner": "both_bad",
+  "a": "qwen3-4b",
+  "b": "quiver",
+  "at": 1789062606313
+ },
+ {
+  "prompt_id": "ui-calendar",
+  "family": "product-ui",
+  "winner": "both_bad",
+  "a": "quiver",
+  "b": "qwen3-4b",
+  "at": 1789062607956
+ },
+ {
+  "prompt_id": "ic-cloud",
+  "family": "icon",
+  "winner": "openai",
+  "a": "qwen3-4b",
+  "b": "openai",
+  "at": 1789062611114
+ },
+ {
+  "prompt_id": "ic-chart",
+  "family": "icon",
+  "winner": "both_bad",
+  "a": "quiver",
+  "b": "qwen3-4b",
+  "at": 1789062614121
+ },
+ {
+  "prompt_id": "sc-stack",
+  "family": "scene",
+  "winner": "openai",
+  "a": "openai",
+  "b": "qwen3-4b",
+  "at": 1789062615404
+ },
+ {
+  "prompt_id": "ui-memory",
+  "family": "product-ui",
+  "winner": "both_bad",
+  "a": "qwen3-4b",
+  "b": "quiver",
+  "at": 1789062617910
+ },
+ {
+  "prompt_id": "ui-agent",
+  "family": "product-ui",
+  "winner": "quiver",
+  "a": "qwen3-4b",
+  "b": "quiver",
+  "at": 1789062620422
+ },
+ {
+  "prompt_id": "lg-mono",
+  "family": "logo",
+  "winner": "openai",
+  "a": "openai",
+  "b": "quiver",
+  "at": 1789062622072
+ },
+ {
+  "prompt_id": "ui-chat",
+  "family": "product-ui",
+  "winner": "openai",
+  "a": "openai",
+  "b": "qwen3-4b",
+  "at": 1789062623392
+ },
+ {
+  "prompt_id": "hw-quad",
+  "family": "hardware",
+  "winner": "quiver",
+  "a": "quiver",
+  "b": "qwen3-4b",
+  "at": 1789062626534
+ },
+ {
+  "prompt_id": "ui-bank",
+  "family": "product-ui",
+  "winner": "openai",
+  "a": "quiver",
+  "b": "openai",
+  "at": 1789062628717
+ },
+ {
+  "prompt_id": "hw-arm",
+  "family": "hardware",
+  "winner": "quiver",
+  "a": "quiver",
+  "b": "openai",
+  "at": 1789062630314
+ },
+ {
+  "prompt_id": "sc-stack",
+  "family": "scene",
+  "winner": "quiver",
+  "a": "openai",
+  "b": "quiver",
+  "at": 1789062634408
+ },
+ {
+  "prompt_id": "sc-split",
+  "family": "scene",
+  "winner": "openai",
+  "a": "quiver",
+  "b": "openai",
+  "at": 1789062635993
+ },
+ {
+  "prompt_id": "ic-lock",
+  "family": "icon",
+  "winner": "qwen3-4b",
+  "a": "qwen3-4b",
+  "b": "openai",
+  "at": 1789062639161
+ },
+ {
+  "prompt_id": "hw-quad",
+  "family": "hardware",
+  "winner": "openai",
+  "a": "openai",
+  "b": "qwen3-4b",
+  "at": 1789062640868
+ },
+ {
+  "prompt_id": "ui-search",
+  "family": "product-ui",
+  "winner": "both_bad",
+  "a": "quiver",
+  "b": "qwen3-4b",
+  "at": 1789062643928
+ },
+ {
+  "prompt_id": "sc-presence",
+  "family": "scene",
+  "winner": "openai",
+  "a": "qwen3-4b",
+  "b": "openai",
+  "at": 1789062645471
+ },
+ {
+  "prompt_id": "ic-gear",
+  "family": "icon",
+  "winner": "quiver",
+  "a": "qwen3-4b",
+  "b": "quiver",
+  "at": 1789062646858
+ },
+ {
+  "prompt_id": "hw-pocket",
+  "family": "hardware",
+  "winner": "quiver",
+  "a": "quiver",
+  "b": "qwen3-4b",
+  "at": 1789062647767
+ },
+ {
+  "prompt_id": "lg-orbit",
+  "family": "logo",
+  "winner": "qwen3-4b",
+  "a": "qwen3-4b",
+  "b": "quiver",
+  "at": 1789062648809
+ },
+ {
+  "prompt_id": "hw-weather",
+  "family": "hardware",
+  "winner": "quiver",
+  "a": "qwen3-4b",
+  "b": "quiver",
+  "at": 1789062649813
+ },
+ {
+  "prompt_id": "lg-orbit",
+  "family": "logo",
+  "winner": "openai",
+  "a": "qwen3-4b",
+  "b": "openai",
+  "at": 1789062651007
+ },
+ {
+  "prompt_id": "hw-rover",
+  "family": "hardware",
+  "winner": "openai",
+  "a": "openai",
+  "b": "qwen3-4b",
+  "at": 1789062652118
+ },
+ {
+  "prompt_id": "hw-arm",
+  "family": "hardware",
+  "winner": "quiver",
+  "a": "quiver",
+  "b": "qwen3-4b",
+  "at": 1789062653331
+ },
+ {
+  "prompt_id": "ui-campaign",
+  "family": "product-ui",
+  "winner": "quiver",
+  "a": "quiver",
+  "b": "qwen3-4b",
+  "at": 1789062654441
+ },
+ {
+  "prompt_id": "hw-nightlight",
+  "family": "hardware",
+  "winner": "quiver",
+  "a": "quiver",
+  "b": "qwen3-4b",
+  "at": 1789062655652
+ },
+ {
+  "prompt_id": "sc-hub",
+  "family": "scene",
+  "winner": "quiver",
+  "a": "quiver",
+  "b": "qwen3-4b",
+  "at": 1789062656486
+ },
+ {
+  "prompt_id": "lg-leaf",
+  "family": "logo",
+  "winner": "openai",
+  "a": "qwen3-4b",
+  "b": "openai",
+  "at": 1789062657359
+ },
+ {
+  "prompt_id": "lg-wave",
+  "family": "logo",
+  "winner": "both_good",
+  "a": "qwen3-4b",
+  "b": "quiver",
+  "at": 1789062662375
+ },
+ {
+  "prompt_id": "lg-mono",
+  "family": "logo",
+  "winner": "both_good",
+  "a": "qwen3-4b",
+  "b": "quiver",
+  "at": 1789062667109
+ },
+ {
+  "prompt_id": "ui-search",
+  "family": "product-ui",
+  "winner": "openai",
+  "a": "openai",
+  "b": "quiver",
+  "at": 1789062670213
+ },
+ {
+  "prompt_id": "lg-wave",
+  "family": "logo",
+  "winner": "openai",
+  "a": "qwen3-4b",
+  "b": "openai",
+  "at": 1789062673884
+ },
+ {
+  "prompt_id": "hw-radar",
+  "family": "hardware",
+  "winner": "both_good",
+  "a": "quiver",
+  "b": "openai",
+  "at": 1789062676563
+ },
+ {
+  "prompt_id": "hw-rover",
+  "family": "hardware",
+  "winner": "quiver",
+  "a": "openai",
+  "b": "quiver",
+  "at": 1789062678076
+ },
+ {
+  "prompt_id": "hw-nightlight",
+  "family": "hardware",
+  "winner": "both_good",
+  "a": "quiver",
+  "b": "openai",
+  "at": 1789062681301
+ },
+ {
+  "prompt_id": "ic-gear",
+  "family": "icon",
+  "winner": "openai",
+  "a": "quiver",
+  "b": "openai",
+  "at": 1789062682245
+ },
+ {
+  "prompt_id": "ic-cloud",
+  "family": "icon",
+  "winner": "quiver",
+  "a": "quiver",
+  "b": "qwen3-4b",
+  "at": 1789062683287
+ },
+ {
+  "prompt_id": "sc-command",
+  "family": "scene",
+  "winner": "quiver",
+  "a": "qwen3-4b",
+  "b": "quiver",
+  "at": 1789062685492
+ },
+ {
+  "prompt_id": "ic-lock",
+  "family": "icon",
+  "winner": "quiver",
+  "a": "openai",
+  "b": "quiver",
+  "at": 1789062686672
+ },
+ {
+  "prompt_id": "ic-folder",
+  "family": "icon",
+  "winner": "openai",
+  "a": "openai",
+  "b": "qwen3-4b",
+  "at": 1789062687622
+ }
+]
