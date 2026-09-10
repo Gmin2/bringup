@@ -1,5 +1,12 @@
 """Build the rating page: blind pairwise comparisons over a run.
 
+Four answers, not three. Better-left and better-right are the ranking signal;
+both-good and both-bad are the ones that decide what goes in the pool at all.
+A plain "tie" would collapse those two, and they mean opposite things: both good
+means both belong in the reference pool, both bad means no model can do this
+prompt and ranking two failures would only teach a judge to prefer one kind of
+failure.
+
 Pairwise rather than a 0-10 score, because that is what surya's post-mortem
 found: asked to score a drawing out of ten, a judge bunches everything near the
 bottom and the reward has almost no dynamic range. Asked which of two is better,
@@ -119,7 +126,8 @@ function again() { done = {}; localStorage.removeItem(KEY); i = 0; location.relo
 addEventListener('keydown', e => {
   if (e.key === 'ArrowLeft' || e.key === 'a') choose('a');
   else if (e.key === 'ArrowRight' || e.key === 'd') choose('b');
-  else if (e.key === ' ' || e.key === 't') { e.preventDefault(); choose('tie'); }
+  else if (e.key === ' ' || e.key === 'g') { e.preventDefault(); choose('both_good'); }
+  else if (e.key === 'x') choose('both_bad');
   else if (e.key === 's') choose('skip');
 });
 
@@ -177,12 +185,14 @@ def main() -> int:
     <div class="side" id="right" onclick="choose('b')"><div class="art"></div><div class="key">right &rarr;</div></div>
   </div>
   <div class="row">
-    <button onclick="choose('tie')">tie</button>
+    <button onclick="choose('both_good')">both good</button>
+    <button onclick="choose('both_bad')">both bad</button>
     <button onclick="choose('skip')">skip</button>
     <button class="primary" onclick="save()">download so far</button>
   </div>
   <p class="hint"><kbd>&larr;</kbd> left is better &nbsp; <kbd>&rarr;</kbd> right is better &nbsp;
-     <kbd>space</kbd> tie &nbsp; <kbd>s</kbd> skip<br>
+     <kbd>space</kbd> both good &nbsp; <kbd>x</kbd> both bad &nbsp; <kbd>s</kbd> skip<br>
+     use both freely. whether a prompt is within reach at all matters more than a forced winner.<br>
      model names are hidden and sides are shuffled. progress saves as you go.</p>
 </div></div>
 <script>{JS.replace("__PAIRS__", json.dumps(pairs)).replace("__RUN__", args.run)}</script>"""
