@@ -179,3 +179,26 @@ validity: hardware drawings are a fifth the size of gpt's, and clip retrieval is
 The three gate failures are xml hygiene, not drawing: a raw `&` in a text label
 and two duplicate attributes. Those are the easiest thing for rl to fix, since
 the gate gives an unambiguous binary signal.
+
+## Rating
+
+The gates say an output is legitimate and clip says it is roughly on topic.
+Neither says whether a drawing is any good, and that is the term the reward
+still needs. It has to come from a person first: a judge model is only worth
+trusting once it has been checked against real ratings.
+
+    python -m bringup.rate --run 2026-09-10
+    open runs/2026-09-10/rate.html
+
+Pairwise rather than a score out of ten. That is surya's finding: asked to rate
+a drawing 0-10 a judge bunches everything near the bottom and the reward has
+almost no dynamic range, while "which of these two is better" gets answered
+reliably. The same holds for a person.
+
+Blind and shuffled. Model names are hidden and left/right is randomised per
+pair, so a preference for a familiar style cannot leak in. Pairs are shuffled
+too, so a partial session still spans every family. Progress saves in the
+browser as you go; the download button writes `ratings.json`.
+
+Three models over 34 prompts is 102 pairs, evenly split across the three
+matchups.
