@@ -35,6 +35,11 @@ SYSTEM = (
     "- never embed a raster image, never use <image>, never use <foreignObject>\n"
     "- no external references, no scripts, no animation\n"
     "- text is allowed but keep it to short labels"
+    # the `detail` variant from bringup/evolve.py. picked because it is the only
+    # variant with a perfect gate rate (15/15 vs 13/15 for base) and it drew zero
+    # position-biased judge verdicts. it is NOT a quality win: head to head against
+    # base the judge went 4-2 over 15 prompts, which is noise. adopted for validity.
+    '\n\nDraw at the density a professional illustration has. A finished drawing is\nusually 60 to 200 elements: outlines, fills, interior detail, labels. Ten\nshapes is a placeholder, not a drawing.'
 )
 
 
@@ -89,7 +94,9 @@ class OpenAIProvider:
         self.name = name
         self.model = model or os.environ.get("OPENAI_MODEL", "gpt-6-astra")
         self.base = (base_url or os.environ.get("OPENAI_BASE_URL", "https://api.openai.com")).rstrip("/")
-        self.key = os.environ.get(api_key_env, "")
+        # a local server wants no auth but still needs the header to exist, so
+        # fill in a placeholder rather than refusing the call
+        self.key = os.environ.get(api_key_env, "") or ("local" if "localhost" in self.base or "127.0.0.1" in self.base else "")
         # a local mlx server defaults to 512 tokens, which silently truncates a
         # drawing mid-element and looks exactly like the model failing
         self.max_tokens = max_tokens
@@ -185,9 +192,6 @@ def available() -> list:
     if os.environ.get("QUIVER_API_KEY"):
         out.append(QuiverProvider())
     if os.environ.get("LOCAL_MODEL"):
-        # a local mlx server wants no auth, but OpenAIProvider refuses to call
-        # without a key, so give it a placeholder rather than a special case
-        os.environ.setdefault("LOCAL_API_KEY", "local")
         out.append(OpenAIProvider(
             model=os.environ["LOCAL_MODEL"],
             base_url=os.environ.get("LOCAL_BASE_URL", "http://localhost:8080"),
