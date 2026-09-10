@@ -89,7 +89,9 @@ class OpenAIProvider:
         self.name = name
         self.model = model or os.environ.get("OPENAI_MODEL", "gpt-6-astra")
         self.base = (base_url or os.environ.get("OPENAI_BASE_URL", "https://api.openai.com")).rstrip("/")
-        self.key = os.environ.get(api_key_env, "")
+        # a local server wants no auth but still needs the header to exist, so
+        # fill in a placeholder rather than refusing the call
+        self.key = os.environ.get(api_key_env, "") or ("local" if "localhost" in self.base or "127.0.0.1" in self.base else "")
         # a local mlx server defaults to 512 tokens, which silently truncates a
         # drawing mid-element and looks exactly like the model failing
         self.max_tokens = max_tokens
@@ -185,9 +187,6 @@ def available() -> list:
     if os.environ.get("QUIVER_API_KEY"):
         out.append(QuiverProvider())
     if os.environ.get("LOCAL_MODEL"):
-        # a local mlx server wants no auth, but OpenAIProvider refuses to call
-        # without a key, so give it a placeholder rather than a special case
-        os.environ.setdefault("LOCAL_API_KEY", "local")
         out.append(OpenAIProvider(
             model=os.environ["LOCAL_MODEL"],
             base_url=os.environ.get("LOCAL_BASE_URL", "http://localhost:8080"),

@@ -195,9 +195,13 @@ def main() -> int:
                 continue
             try:
                 a = rasterize(fa.read_text(), width=448)
+            except RenderError:
+                losses += 1   # base is renderable, the variant is not
+                continue
+            try:
                 b = rasterize(fb.read_text(), width=448)
             except RenderError:
-                skipped += 1
+                losses += 1
                 continue
             v = judge.compare(a, b, prompts_by_id[p["id"]]["prompt"])
             if v.error or v.winner in (None, "biased"):

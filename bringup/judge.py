@@ -69,7 +69,10 @@ class VisionJudge:
             return v
         body = {
             "model": self.model,
-            self.token_param: 16,
+            # a reasoning model spends tokens before it answers, and a tight cap
+            # comes back as an empty string with finish_reason=length. that reads
+            # as a refusal and silently drops the comparison, so leave room.
+            self.token_param: int(os.environ.get("JUDGE_MAX_TOKENS", "3000")),
             "messages": [{
                 "role": "user",
                 "content": [
