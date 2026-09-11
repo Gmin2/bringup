@@ -17,7 +17,29 @@ import json
 import random
 from pathlib import Path
 
+import re
+
 from bringup.providers import SYSTEM
+
+_EL = re.compile(r"<(path|rect|circle|ellipse|line|polygon|polyline|text|g|use)\b[^>]*>", re.S)
+
+
+def longest_same_shape_run(svg: str) -> int:
+    """Longest run of consecutive elements that are the same shape with only the
+    numbers changed.
+
+    The first fine-tune collapsed into repeating one element forever. The cause
+    was here: the teacher padded drawings with runs of near-identical shapes, so
+    the model learned that the next element looks like the last one. Teacher
+    forcing hides it because the real numbers keep changing; generating on its
+    own, it is a state the model never leaves.
+    """
+    els = [re.sub(r"-?\d+(\.\d+)?", "#", m.group(0)) for m in _EL.finditer(svg)]
+    run = best = 1 if els else 0
+    for a, b in zip(els, els[1:]):
+        run = run + 1 if a == b else 1
+        best = max(best, run)
+    return best
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -57,6 +79,9 @@ def main() -> int:
     ap.add_argument("--out", default="data/illus/sft")
     ap.add_argument("--valid", type=float, default=0.1)
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--max-same-run", type=int, default=0,
+                    help="drop targets containing a longer run of consecutive same-shape "
+                         "elements than this. these are what taught the first fine-tune to loop")
     ap.add_argument("--max-tokens", type=int, default=0,
                     help="drop examples longer than this. dropping loses an example, "
                          "truncating corrupts one: a cut svg never closes its tag, and "
@@ -66,6 +91,13 @@ def main() -> int:
     prompts = {p["id"]: p for p in json.loads((ROOT / args.prompts).read_text())}
     dirs = [ROOT / "runs" / r.strip() / "openai" for r in args.runs.split(",")]
     rows = collect([d for d in dirs if d.exists()], prompts)
+    if args.max_same_run:
+        before = len(rows)
+        for r in rows:
+            r["_run"] = longest_same_shape_run(r["messages"][-1]["content"])
+        rows = [r for r in rows if r["_run"] <= args.max_same_run]
+        print(f"same-shape-run filter at {args.max_same_run}: kept {len(rows)}/{before}, "
+              f"dropped {before - len(rows)} that teach the model to repeat")
     if args.max_tokens:
         import os
         os.environ.setdefault("HF_HOME", str(ROOT / "tmp/hf"))
