@@ -54,9 +54,64 @@ def inline(svg: str) -> str:
     return _SIZE_ATTR.sub("", svg, count=2)
 
 
+GRID_CSS = """
+.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:16px; padding:0 28px 40px }
+.card { background:var(--card); border:1px solid var(--line); border-radius:12px; overflow:hidden }
+.card .art { height:200px; border:0; border-bottom:1px solid var(--line); border-radius:0 }
+.card .cap { padding:10px 12px }
+.card .cap p { margin:0 0 6px; color:#3f3f46; font-size:12px; line-height:1.45 }
+"""
+
+
+def grid(run_dir, provs, prompts, run):
+    """One card per drawing. A 142-row table is not something anyone scans."""
+    prov = provs[0]
+    by_id = {p["id"]: p for p in prompts}
+    cards = []
+    for f in sorted((run_dir / prov).glob("*.svg")):
+        pid = f.stem
+        p = by_id.get(pid)
+        if not p:
+            continue
+        meta_f = f.with_suffix(".json")
+        m = json.loads(meta_f.read_text()) if meta_f.exists() else {}
+        info = m.get("info") or {}
+        bits = [f'{m.get("ms",0)//1000}s']
+        if "bytes" in info:
+            bits.append(f'{info["bytes"]}b')
+        if "shapes" in info:
+            bits.append(f'{info["shapes"]} shapes')
+        g = m.get("gates") or {}
+        if g:
+            bits.append("gates ok" if g.get("passed")
+                        else f'<span class="fail">{",".join(g.get("failed", []))}</span>')
+        cards.append(
+            f'<div class="card"><div class="art">{inline(f.read_text())}</div>'
+            f'<div class="cap"><p>{html.escape(p["prompt"])}</p>'
+            f'<div class="foot"><span class="pid">{pid}</span> {" ".join(bits)}</div></div></div>'
+        )
+    doc = (
+        f'<!doctype html><meta charset="utf-8"><title>{prov} {run}</title>'
+        f"<style>{CSS}{GRID_CSS}</style>"
+        f'<header><h1>{prov} &middot; {len(cards)} drawings</h1>'
+        f'<div class="meta">run {run} &middot; svg inlined, not rasterised</div></header>'
+        f'<div class="grid">{"".join(cards)}</div>'
+    )
+    out = run_dir / "gallery.html"
+    out.write_text(doc)
+    print(f"wrote {out}  ({len(cards)} drawings)")
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--run", default=date.today().isoformat())
+    ap.add_argument("--prompts", default=str(PROMPTS),
+                    help="prompt file; defaults to the held-out eval set")
+    ap.add_argument("--grid", action="store_true",
+                    help="one card per drawing instead of a prompt-by-model table. "
+                         "for browsing a single provider's run, where the table would be "
+                         "one very long column")
     args = ap.parse_args()
 
     run_dir = RUNS / args.run
@@ -65,7 +120,10 @@ def main() -> int:
         return 1
 
     provs = sorted(d.name for d in run_dir.iterdir() if d.is_dir())
-    prompts = json.loads(PROMPTS.read_text())
+    prompts = json.loads(Path(args.prompts).read_text())
+
+    if args.grid:
+        return grid(run_dir, provs, prompts, args.run)
 
     rows = []
     for p in prompts:
