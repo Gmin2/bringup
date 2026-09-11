@@ -11,3 +11,5 @@ data/plans/
 data/prompts.json
 data/sft.jsonl
 data/system-*.txt
+data/illus/sft/
+data/illus/train_prompts.json

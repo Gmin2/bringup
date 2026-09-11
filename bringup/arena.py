@@ -105,6 +105,8 @@ def main() -> int:
     ap.add_argument("--width", type=int, default=512)
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--family", default="", help="only prompts in this family")
+    ap.add_argument("--prompts", default=str(PROMPTS),
+                    help="prompt file; defaults to the held-out eval set")
     ap.add_argument("--rescore", action="store_true",
                     help="re-run the gates over svgs already on disk, no api calls")
     args = ap.parse_args()
@@ -118,7 +120,7 @@ def main() -> int:
         print("no providers configured. check .env")
         return 1
 
-    prompts = json.loads(PROMPTS.read_text())
+    prompts = json.loads(Path(args.prompts).read_text())
     if args.family:
         prompts = [p for p in prompts if p["family"] == args.family]
     if args.limit:
