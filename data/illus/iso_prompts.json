@@ -1,0 +1,8 @@
+[
+{"id":"iso-espresso","family":"iso","prompt":"an espresso coffee machine with a portafilter handle, a drip tray, control knobs and a cup beside it"},
+{"id":"iso-handheld","family":"iso","prompt":"a retro handheld game console with a screen, a d-pad, two round buttons and a speaker grille"},
+{"id":"iso-pi","family":"iso","prompt":"a raspberry pi single board computer with a 40 pin header, usb ports, an ethernet jack and a heatsink"},
+{"id":"iso-keyboard","family":"iso","prompt":"a mechanical keyboard with visible keycaps, a raised case and a cable"},
+{"id":"iso-lamp","family":"iso","prompt":"an angled desk lamp with a weighted base, a jointed arm and a conical shade"},
+{"id":"iso-camera","family":"iso","prompt":"a compact mirrorless camera with a lens barrel, a mode dial, a shutter button and a hot shoe"}
+]
